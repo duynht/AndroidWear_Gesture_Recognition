@@ -1,5 +1,5 @@
 import socket
-
+import time
 if __name__ == '__main__':
     # socket.setblocking(0)
     # hostname = socket.gethostname()
@@ -18,8 +18,17 @@ if __name__ == '__main__':
     sock.bind((UDP_IP, UDP_PORT))
 
     # receive data from watch
-    while True:
-        print("Data: ")
-        data, addr = sock.recvfrom(1024)
-        print(data)
     
+    counter = 0
+    while True:
+        if counter == 0:
+            start_time = time.time()
+        current_time = time.time()
+        elapsed_time = current_time - start_time
+        counter += 1
+        if elapsed_time > 1:
+            break
+        # print("Data: ")
+        data, addr = sock.recvfrom(1024)
+        # print(data)
+    print(counter)
